@@ -28,7 +28,7 @@ class Calculator
         {
             Console.WriteLine("Неправильная скобочная последовательность");
         }
-
+        Console.ReadKey();
 
 
     }
@@ -88,7 +88,7 @@ class Calculator
 
         if (op == '/' && operand2 == 0)
         {
-            Console.WriteLine("Делитҗ на 0 нелҗзя"); 
+            Console.WriteLine("Делить на 0 нельзя"); 
             Environment.Exit(0);
         }
 
