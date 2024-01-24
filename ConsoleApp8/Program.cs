@@ -8,12 +8,27 @@ class Calculator
     static void Main()
     {
         Console.WriteLine("вводите выражение с скобками через пробел пример:  ( ( 2 + 3 ) * 5 - ( 7 -3 ) / 3 ) * 8           :");
+        //string input = Console.ReadLine();
+
+        //string[] tokens = input.Split(' ');
+
+        //double result = EvaluateExpression(tokens);
+        //Console.WriteLine("Result: " + result);
+
         string input = Console.ReadLine();
 
         string[] tokens = input.Split(' ');
 
-        double result = EvaluateExpression(tokens);
-        Console.WriteLine("Result: " + result);
+        if (CheckBracketSequence(tokens))
+        {
+            double result = EvaluateExpression(tokens);
+            Console.WriteLine("Result: " + result);
+        }
+        else
+        {
+            Console.WriteLine("Неправильная скобочная последовательность");
+        }
+
 
 
     }
@@ -111,5 +126,30 @@ class Calculator
         }
         return true;
     }
+    static bool CheckBracketSequence(string[] tokens)  //проверка правильности скобочной последовательности в арифметическом выражении,
+    {
+        Stack<char> brackets = new Stack<char>();
 
+        for (int i = 0; i < tokens.Length; i++)
+        {
+            string token = tokens[i];
+
+            foreach (char c in token)
+            {
+                if (c == '(')
+                {
+                    brackets.Push(c);
+                }
+                else if (c == ')')
+                {
+                    if (brackets.Count == 0 || brackets.Peek() != '(')
+                    {
+                        return false;
+                    }
+                    brackets.Pop();
+                }
+            }
+        }
+        return brackets.Count == 0;
+    }
 }
